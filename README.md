@@ -42,3 +42,12 @@ Ya dentro del contenedor, ejecutamos el comando `composer install` para generar 
 
 Para probar el programa una vez levantado el contenedor de docker en el puerto deseado, accedemos desde nuestro navegador a la dirección http://localhost:81 (en nuestro caso hemos desplegado en el puerto 81).
 
+Por defecto deberá aparecer la salida del código que SI respeta el principio de segregación de interfaces. 
+Si queremos probar con el código que no lo hace, comentaremos los uses del namespace *good_code* en el directorio `src/index.php` y descomentaremos los que aparecen con el namespace *bad_code*.
+De esta forma, podemos observar que la clase Bird ahora tendrá un método incorrecto (bark) y similar en la clase Dog (fly).
+
+### Explicación
+
+Heredar de una interfaz tan genérica como Animal y contener en esta métodos que no todos sus subtipos pueden ejecutar no es correcto.
+
+Estos métodos deben in o bien en sus clases propias (Como por ejemplo bark. Únicamente los perros pueden ladrar), o bien en interfaces menos genéricas (Como es el caso de fly. Suponiendo que queramos introducir en nuestro programa otros animales voladores. En caso de no querer hacerlo, este método podría entenderse como propio de la clase Bird, y no necesitar la interfaz de FlyingAnimal).
