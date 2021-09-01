@@ -1,0 +1,6 @@
+
+.env
+
+# Composer files
+src/composer.lock
+src/vendor/
